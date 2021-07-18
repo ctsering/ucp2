@@ -25,7 +25,7 @@ resource "azurerm_subnet" "mySubnet" {
 
 # Create NIC
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface
-
+# Tarjeta de red para la VM1
 resource "azurerm_network_interface" "myNic1" {
   name                = "vmnic1"  
   location            = azurerm_resource_group.rg.location
@@ -36,6 +36,44 @@ resource "azurerm_network_interface" "myNic1" {
     subnet_id                      = azurerm_subnet.mySubnet.id 
     private_ip_address_allocation  = "Static"
     private_ip_address             = "10.0.1.10"
+    public_ip_address_id           = azurerm_public_ip.myPublicIp1.id
+  }
+
+    tags = {
+        environment = "unircp2"
+    }
+
+}
+#Tarjeta de red para la VM2
+resource "azurerm_network_interface" "myNic2" {
+  name                = "vmnic1"  
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+    ip_configuration {
+    name                           = "myipconfiguration2"
+    subnet_id                      = azurerm_subnet.mySubnet.id 
+    private_ip_address_allocation  = "Static"
+    private_ip_address             = "10.0.2.10"
+    public_ip_address_id           = azurerm_public_ip.myPublicIp1.id
+  }
+
+    tags = {
+        environment = "unircp2"
+    }
+
+}
+# Tarjeta de red para la VM3
+resource "azurerm_network_interface" "myNic3" {
+  name                = "vmnic1"  
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+    ip_configuration {
+    name                           = "myipconfiguration3"
+    subnet_id                      = azurerm_subnet.mySubnet.id 
+    private_ip_address_allocation  = "Static"
+    private_ip_address             = "10.0.3.10"
     public_ip_address_id           = azurerm_public_ip.myPublicIp1.id
   }
 
