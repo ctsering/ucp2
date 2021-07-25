@@ -2,3 +2,4 @@ credentials.tf
 *tfstate*
 .terraform*
 *plan*
+*.old
