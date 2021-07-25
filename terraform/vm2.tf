@@ -38,7 +38,7 @@ resource "azurerm_linux_virtual_machine" "myVM2" {
     }
 
     tags = {
-        environment = "unircp2"
+        environment = "ucp2"
     }
 
 }
