@@ -19,7 +19,7 @@ resource "azurerm_network_security_group" "mySecGroup" {
     }
 
     tags = {
-        environment = "unircp2"
+        environment = "ucp2"
     }
 }
 
@@ -27,7 +27,8 @@ resource "azurerm_network_security_group" "mySecGroup" {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_security_group_association
 
 resource "azurerm_network_interface_security_group_association" "mySecGroupAssociation1" {
-    network_interface_id      = azurerm_network_interface.myNic1.id
+#    count 		      = length(var.envs)
+    network_interface_id      = azurerm_network_interface.name.id
     network_security_group_id = azurerm_network_security_group.mySecGroup.id
 
 }

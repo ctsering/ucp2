@@ -19,7 +19,7 @@ resource "azurerm_network_security_group" "mySecGroup2" {
     }
 
     tags = {
-        environment = "unircp2"
+        environment = "ucp2"
     }
 }
 

@@ -1,0 +1,64 @@
+# Creación de red
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network
+
+resource "azurerm_virtual_network" "myNet" {
+    name                = "kubernetesnet"
+    address_space       = ["10.0.0.0/16"]
+    location            = azurerm_resource_group.rg.location
+    resource_group_name = azurerm_resource_group.rg.name
+
+    tags = {
+        environment = "ucp2"
+    }
+}
+
+# Creación de subnet
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet
+
+resource "azurerm_subnet" "mySubnetEnv" {
+    	count		       = length(var.envs)
+	name                   = "terraformsubnet-${var.envs[count.index]}"
+	resource_group_name    = azurerm_resource_group.rg.name
+    	virtual_network_name   = azurerm_virtual_network.myNet.name
+    	address_prefixes       = ["10.0.${100 + count.index}.0/24"]
+
+}
+
+# Create NIC
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface
+# Tarjeta de red para la VM1
+resource "azurerm_network_interface" "myNic1" {
+  count		      = length(var.vms)			
+  name                = "vmnic-${var.vms[count.index]}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+    ip_configuration {
+    name                           = "myipconfiguration${var.vms[count.index]}"
+    subnet_id                      = azurerm_subnet.mySubnet.id
+    private_ip_address_allocation  = "Static"
+    private_ip_address             = "10.0.1.${10 + count.index}"
+    public_ip_address_id           = azurerm_public_ip.myPublicIp${var.vms[count.index]}.id
+  }
+
+    tags = {
+        environment = "ucp2"
+    }
+
+}
+
+# IP pública
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip
+
+resource "azurerm_public_ip" "myPublicIp${var.vms[count.index]}" {
+  name                = "vmip${var.vms[count.index]}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
+  sku                 = "Basic"
+
+    tags = {
+        environment = "ucp2"
+    }
+
+}
