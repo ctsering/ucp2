@@ -1,0 +1,9 @@
+---
+
+- name: deploying kubernetes (step 1 - common task on master and workers)
+	hosts: all
+	vars_files:
+		- "group_vars/k8s-common.yaml"
+	gather_facts: false
+	roles:
+		- role: k8s-common

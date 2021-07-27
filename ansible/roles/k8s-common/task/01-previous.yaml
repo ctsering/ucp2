@@ -1,0 +1,36 @@
+---
+- name: configure timezone
+	timezone:
+		name: "{{ timezone }}"
+	become: true
+
+- name: update all package
+        dnf:
+                name: "*"
+		state: latest
+        become: true
+
+- name: install commmon packages
+        dnf:
+                name: "{{ common rpms }}"
+        become: true
+
+- name: configure time synchronization
+        systemd:
+                name: "chronyd"
+		state: started
+		enabled: yes
+		masked: no
+        become: true
+
+- name: enabled firewalld
+        systemd:
+                name: "firewalld"
+		state: started
+		enabled: yes
+		masked: no
+        become: true
+
+- name: timedatectl
+        command: /usr/bin/timedatectl set-ntp true
+        become: true

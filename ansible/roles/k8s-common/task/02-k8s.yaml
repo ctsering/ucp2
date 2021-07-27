@@ -1,0 +1,75 @@
+---
+- name: load br_netfilter (transparent masquerading)
+	nodprobe:
+		name: br_netfilter
+		state: present
+	become: true
+
+- name: add masquerafing to firewalld (transparent masquerading)
+        firewalld:
+                masquerade: yes
+                permanent: yes
+		inmediate: yes
+		state: enabled
+        become: true
+
+- name: copy configuration files
+        copy:
+                src: "{{ item.path }}"
+                state: "{{ item.dest }}"
+		owner: root
+		group: root
+		mode: 0644
+        become: true
+	with_items:
+		- {'path': 'k8s.conf', 'dest': '/etc/systemctl.d/k8s.conf'}
+		- {'path': 'kubernetes.repo', 'dest': '/etc/yum.repos.d/kubernetes.repo'}
+
+- name: apply k8s kernel configuration
+  command: /usr/sbin/systemctl --system
+  become: true
+
+- name: disable swap
+  command: /usr/sbin/swapoff -a
+  become: true
+
+- name: remove swap from /etc/fstab
+	lineinfile:
+		path: /etc/fstab
+		regexp: '{.*}swap{.*}'	
+		backup: no
+		state: absent
+	become: true
+
+- name: configure docker repo 
+  command: /usr/bin/dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+  become: true
+
+- name: install docker packages
+  dnf:
+	name: "{{ docker_rpms  }}"
+	state: present
+  became: true
+
+- name: enable docker services
+  systemd:
+	name: "docker"
+	state: started
+	enabled: yes
+	masked: no
+  become: true
+
+- name: installing kubernetes
+  command: /usr/bin/dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+  become: true
+
+- name: enable kubelet service
+  systemd:
+	name: "kubelet"
+	state: started
+	enabled: yes
+	masked: no
+  become: true
+
+
+

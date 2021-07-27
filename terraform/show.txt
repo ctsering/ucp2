@@ -1,0 +1,583 @@
+[0m# azurerm_linux_virtual_machine.myVM[0]:
+resource "azurerm_linux_virtual_machine" "myVM" {
+    [1m[0madmin_username[0m[0m                  = "adminUser"
+    [1m[0mallow_extension_operations[0m[0m      = true
+    [1m[0mcomputer_name[0m[0m                   = "vm-master-nfs"
+    [1m[0mdisable_password_authentication[0m[0m = true
+    [1m[0mencryption_at_host_enabled[0m[0m      = false
+    [1m[0mextensions_time_budget[0m[0m          = "PT1H30M"
+    [1m[0mid[0m[0m                              = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Compute/virtualMachines/vm-master-nfs"
+    [1m[0mlocation[0m[0m                        = "westeurope"
+    [1m[0mmax_bid_price[0m[0m                   = -1
+    [1m[0mname[0m[0m                            = "vm-master-nfs"
+    [1m[0mnetwork_interface_ids[0m[0m           = [
+        "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-master-nfs",
+    ]
+    [1m[0mpriority[0m[0m                        = "Regular"
+    [1m[0mprivate_ip_address[0m[0m              = "10.0.100.10"
+    [1m[0mprivate_ip_addresses[0m[0m            = [
+        "10.0.100.10",
+    ]
+    [1m[0mprovision_vm_agent[0m[0m              = true
+    [1m[0mpublic_ip_address[0m[0m               = "20.105.161.135"
+    [1m[0mpublic_ip_addresses[0m[0m             = [
+        "20.105.161.135",
+    ]
+    [1m[0mresource_group_name[0m[0m             = "kubernetes_rg"
+    [1m[0msize[0m[0m                            = "Standard_D1_v2"
+    [1m[0mtags[0m[0m                            = {
+        "environment" = "ucp2"
+    }
+    [1m[0mvirtual_machine_id[0m[0m              = "4239cd97-96f2-4e93-867e-1d969e8d9124"
+
+    admin_ssh_key {
+        [1m[0mpublic_key[0m[0m = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP6bVEazAvZigjtxBLMrrI/QAi671k9pOOdMZ40/Necall2LsuizIrSg359B3LqraaXqRW9C4SiufLCYL42vetgt30ojntfbqjzaM8R4ePOTnTzrihXVupEXIzhUoP2Co1U/HTeannAqz8kktnrUoVnIleaQAK1NGQD4iTPLvkMpTEkkLxkTaREVFqp1wfuzT35m0fU+dM1bTlBYKLeyj0gjiE7D8ORVmMFjuHbAs9od4sky4k3SK2Ed90CIjzoHYlmQodsHyIdTwUUvCZWkSDJDuw4bVPtOg7huR2Vqodw4S6haJfcPSsyfjCPDX86H11l/Uv/Tk9JGMFXXp5ugGZ angel@cc-d52a2a02-66bcd5c4b4-4mxkr
+        EOT
+        [1m[0musername[0m[0m   = "adminUser"
+    }
+
+    boot_diagnostics {
+        [1m[0mstorage_account_uri[0m[0m = "https://storaccangelunircp2.blob.core.windows.net/"
+    }
+
+    os_disk {
+        [1m[0mcaching[0m[0m                   = "ReadWrite"
+        [1m[0mdisk_size_gb[0m[0m              = 30
+        [1m[0mname[0m[0m                      = "vm-master-nfs_OsDisk_1_a75c8a9e5ed64cd1aa85bf55ad9a9834"
+        [1m[0mstorage_account_type[0m[0m      = "Standard_LRS"
+        [1m[0mwrite_accelerator_enabled[0m[0m = false
+    }
+
+    plan {
+        [1m[0mname[0m[0m      = "centos-8-stream-free"
+        [1m[0mproduct[0m[0m   = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+    }
+
+    source_image_reference {
+        [1m[0moffer[0m[0m     = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+        [1m[0msku[0m[0m       = "centos-8-stream-free"
+        [1m[0mversion[0m[0m   = "1.2019.0810"
+    }
+}
+
+# azurerm_linux_virtual_machine.myVM[1]:
+resource "azurerm_linux_virtual_machine" "myVM" {
+    [1m[0madmin_username[0m[0m                  = "adminUser"
+    [1m[0mallow_extension_operations[0m[0m      = true
+    [1m[0mcomputer_name[0m[0m                   = "vm-worker1"
+    [1m[0mdisable_password_authentication[0m[0m = true
+    [1m[0mencryption_at_host_enabled[0m[0m      = false
+    [1m[0mextensions_time_budget[0m[0m          = "PT1H30M"
+    [1m[0mid[0m[0m                              = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Compute/virtualMachines/vm-worker1"
+    [1m[0mlocation[0m[0m                        = "westeurope"
+    [1m[0mmax_bid_price[0m[0m                   = -1
+    [1m[0mname[0m[0m                            = "vm-worker1"
+    [1m[0mnetwork_interface_ids[0m[0m           = [
+        "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker1",
+    ]
+    [1m[0mpriority[0m[0m                        = "Regular"
+    [1m[0mprivate_ip_address[0m[0m              = "10.0.101.10"
+    [1m[0mprivate_ip_addresses[0m[0m            = [
+        "10.0.101.10",
+    ]
+    [1m[0mprovision_vm_agent[0m[0m              = true
+    [1m[0mpublic_ip_address[0m[0m               = "20.105.163.50"
+    [1m[0mpublic_ip_addresses[0m[0m             = [
+        "20.105.163.50",
+    ]
+    [1m[0mresource_group_name[0m[0m             = "kubernetes_rg"
+    [1m[0msize[0m[0m                            = "Standard_D1_v2"
+    [1m[0mtags[0m[0m                            = {
+        "environment" = "ucp2"
+    }
+    [1m[0mvirtual_machine_id[0m[0m              = "a7967fe0-31ec-41e2-a12c-3e6a79a3cff8"
+
+    admin_ssh_key {
+        [1m[0mpublic_key[0m[0m = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP6bVEazAvZigjtxBLMrrI/QAi671k9pOOdMZ40/Necall2LsuizIrSg359B3LqraaXqRW9C4SiufLCYL42vetgt30ojntfbqjzaM8R4ePOTnTzrihXVupEXIzhUoP2Co1U/HTeannAqz8kktnrUoVnIleaQAK1NGQD4iTPLvkMpTEkkLxkTaREVFqp1wfuzT35m0fU+dM1bTlBYKLeyj0gjiE7D8ORVmMFjuHbAs9od4sky4k3SK2Ed90CIjzoHYlmQodsHyIdTwUUvCZWkSDJDuw4bVPtOg7huR2Vqodw4S6haJfcPSsyfjCPDX86H11l/Uv/Tk9JGMFXXp5ugGZ angel@cc-d52a2a02-66bcd5c4b4-4mxkr
+        EOT
+        [1m[0musername[0m[0m   = "adminUser"
+    }
+
+    boot_diagnostics {
+        [1m[0mstorage_account_uri[0m[0m = "https://storaccangelunircp2.blob.core.windows.net/"
+    }
+
+    os_disk {
+        [1m[0mcaching[0m[0m                   = "ReadWrite"
+        [1m[0mdisk_size_gb[0m[0m              = 30
+        [1m[0mname[0m[0m                      = "vm-worker1_OsDisk_1_600ec20678c04ccdb385eb4a3a539656"
+        [1m[0mstorage_account_type[0m[0m      = "Standard_LRS"
+        [1m[0mwrite_accelerator_enabled[0m[0m = false
+    }
+
+    plan {
+        [1m[0mname[0m[0m      = "centos-8-stream-free"
+        [1m[0mproduct[0m[0m   = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+    }
+
+    source_image_reference {
+        [1m[0moffer[0m[0m     = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+        [1m[0msku[0m[0m       = "centos-8-stream-free"
+        [1m[0mversion[0m[0m   = "1.2019.0810"
+    }
+}
+
+# azurerm_linux_virtual_machine.myVM[2]:
+resource "azurerm_linux_virtual_machine" "myVM" {
+    [1m[0madmin_username[0m[0m                  = "adminUser"
+    [1m[0mallow_extension_operations[0m[0m      = true
+    [1m[0mcomputer_name[0m[0m                   = "vm-worker2"
+    [1m[0mdisable_password_authentication[0m[0m = true
+    [1m[0mencryption_at_host_enabled[0m[0m      = false
+    [1m[0mextensions_time_budget[0m[0m          = "PT1H30M"
+    [1m[0mid[0m[0m                              = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Compute/virtualMachines/vm-worker2"
+    [1m[0mlocation[0m[0m                        = "westeurope"
+    [1m[0mmax_bid_price[0m[0m                   = -1
+    [1m[0mname[0m[0m                            = "vm-worker2"
+    [1m[0mnetwork_interface_ids[0m[0m           = [
+        "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker2",
+    ]
+    [1m[0mpriority[0m[0m                        = "Regular"
+    [1m[0mprivate_ip_address[0m[0m              = "10.0.102.10"
+    [1m[0mprivate_ip_addresses[0m[0m            = [
+        "10.0.102.10",
+    ]
+    [1m[0mprovision_vm_agent[0m[0m              = true
+    [1m[0mpublic_ip_address[0m[0m               = "20.105.163.160"
+    [1m[0mpublic_ip_addresses[0m[0m             = [
+        "20.105.163.160",
+    ]
+    [1m[0mresource_group_name[0m[0m             = "kubernetes_rg"
+    [1m[0msize[0m[0m                            = "Standard_D1_v2"
+    [1m[0mtags[0m[0m                            = {
+        "environment" = "ucp2"
+    }
+    [1m[0mvirtual_machine_id[0m[0m              = "e30569e8-9952-49d9-b8ed-41417acf8d6b"
+
+    admin_ssh_key {
+        [1m[0mpublic_key[0m[0m = <<-EOT
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP6bVEazAvZigjtxBLMrrI/QAi671k9pOOdMZ40/Necall2LsuizIrSg359B3LqraaXqRW9C4SiufLCYL42vetgt30ojntfbqjzaM8R4ePOTnTzrihXVupEXIzhUoP2Co1U/HTeannAqz8kktnrUoVnIleaQAK1NGQD4iTPLvkMpTEkkLxkTaREVFqp1wfuzT35m0fU+dM1bTlBYKLeyj0gjiE7D8ORVmMFjuHbAs9od4sky4k3SK2Ed90CIjzoHYlmQodsHyIdTwUUvCZWkSDJDuw4bVPtOg7huR2Vqodw4S6haJfcPSsyfjCPDX86H11l/Uv/Tk9JGMFXXp5ugGZ angel@cc-d52a2a02-66bcd5c4b4-4mxkr
+        EOT
+        [1m[0musername[0m[0m   = "adminUser"
+    }
+
+    boot_diagnostics {
+        [1m[0mstorage_account_uri[0m[0m = "https://storaccangelunircp2.blob.core.windows.net/"
+    }
+
+    os_disk {
+        [1m[0mcaching[0m[0m                   = "ReadWrite"
+        [1m[0mdisk_size_gb[0m[0m              = 30
+        [1m[0mname[0m[0m                      = "vm-worker2_OsDisk_1_1be541c168114a9fb420416e17b0e72b"
+        [1m[0mstorage_account_type[0m[0m      = "Standard_LRS"
+        [1m[0mwrite_accelerator_enabled[0m[0m = false
+    }
+
+    plan {
+        [1m[0mname[0m[0m      = "centos-8-stream-free"
+        [1m[0mproduct[0m[0m   = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+    }
+
+    source_image_reference {
+        [1m[0moffer[0m[0m     = "centos-8-stream-free"
+        [1m[0mpublisher[0m[0m = "cognosys"
+        [1m[0msku[0m[0m       = "centos-8-stream-free"
+        [1m[0mversion[0m[0m   = "1.2019.0810"
+    }
+}
+
+# azurerm_network_interface.myNic[0]:
+resource "azurerm_network_interface" "myNic" {
+    [1m[0mapplied_dns_servers[0m[0m           = []
+    [1m[0mdns_servers[0m[0m                   = []
+    [1m[0menable_accelerated_networking[0m[0m = false
+    [1m[0menable_ip_forwarding[0m[0m          = false
+    [1m[0mid[0m[0m                            = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-master-nfs"
+    [1m[0minternal_domain_name_suffix[0m[0m   = "emei44h1bmiuddb0ioegju04gb.ax.internal.cloudapp.net"
+    [1m[0mlocation[0m[0m                      = "westeurope"
+    [1m[0mname[0m[0m                          = "vmnic-master-nfs"
+    [1m[0mprivate_ip_address[0m[0m            = "10.0.100.10"
+    [1m[0mprivate_ip_addresses[0m[0m          = [
+        "10.0.100.10",
+    ]
+    [1m[0mresource_group_name[0m[0m           = "kubernetes_rg"
+    [1m[0mtags[0m[0m                          = {
+        "environment" = "ucp2"
+    }
+
+    ip_configuration {
+        [1m[0mname[0m[0m                          = "myipconfiguration-pro"
+        [1m[0mprimary[0m[0m                       = true
+        [1m[0mprivate_ip_address[0m[0m            = "10.0.100.10"
+        [1m[0mprivate_ip_address_allocation[0m[0m = "Static"
+        [1m[0mprivate_ip_address_version[0m[0m    = "IPv4"
+        [1m[0mpublic_ip_address_id[0m[0m          = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-master-nfs"
+        [1m[0msubnet_id[0m[0m                     = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-pro"
+    }
+}
+
+# azurerm_network_interface.myNic[1]:
+resource "azurerm_network_interface" "myNic" {
+    [1m[0mapplied_dns_servers[0m[0m           = []
+    [1m[0mdns_servers[0m[0m                   = []
+    [1m[0menable_accelerated_networking[0m[0m = false
+    [1m[0menable_ip_forwarding[0m[0m          = false
+    [1m[0mid[0m[0m                            = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker1"
+    [1m[0minternal_domain_name_suffix[0m[0m   = "emei44h1bmiuddb0ioegju04gb.ax.internal.cloudapp.net"
+    [1m[0mlocation[0m[0m                      = "westeurope"
+    [1m[0mname[0m[0m                          = "vmnic-worker1"
+    [1m[0mprivate_ip_address[0m[0m            = "10.0.101.10"
+    [1m[0mprivate_ip_addresses[0m[0m          = [
+        "10.0.101.10",
+    ]
+    [1m[0mresource_group_name[0m[0m           = "kubernetes_rg"
+    [1m[0mtags[0m[0m                          = {
+        "environment" = "ucp2"
+    }
+
+    ip_configuration {
+        [1m[0mname[0m[0m                          = "myipconfiguration-pre"
+        [1m[0mprimary[0m[0m                       = true
+        [1m[0mprivate_ip_address[0m[0m            = "10.0.101.10"
+        [1m[0mprivate_ip_address_allocation[0m[0m = "Static"
+        [1m[0mprivate_ip_address_version[0m[0m    = "IPv4"
+        [1m[0mpublic_ip_address_id[0m[0m          = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-worker1"
+        [1m[0msubnet_id[0m[0m                     = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-pre"
+    }
+}
+
+# azurerm_network_interface.myNic[2]:
+resource "azurerm_network_interface" "myNic" {
+    [1m[0mapplied_dns_servers[0m[0m           = []
+    [1m[0mdns_servers[0m[0m                   = []
+    [1m[0menable_accelerated_networking[0m[0m = false
+    [1m[0menable_ip_forwarding[0m[0m          = false
+    [1m[0mid[0m[0m                            = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker2"
+    [1m[0minternal_domain_name_suffix[0m[0m   = "emei44h1bmiuddb0ioegju04gb.ax.internal.cloudapp.net"
+    [1m[0mlocation[0m[0m                      = "westeurope"
+    [1m[0mname[0m[0m                          = "vmnic-worker2"
+    [1m[0mprivate_ip_address[0m[0m            = "10.0.102.10"
+    [1m[0mprivate_ip_addresses[0m[0m          = [
+        "10.0.102.10",
+    ]
+    [1m[0mresource_group_name[0m[0m           = "kubernetes_rg"
+    [1m[0mtags[0m[0m                          = {
+        "environment" = "ucp2"
+    }
+
+    ip_configuration {
+        [1m[0mname[0m[0m                          = "myipconfiguration-dev"
+        [1m[0mprimary[0m[0m                       = true
+        [1m[0mprivate_ip_address[0m[0m            = "10.0.102.10"
+        [1m[0mprivate_ip_address_allocation[0m[0m = "Static"
+        [1m[0mprivate_ip_address_version[0m[0m    = "IPv4"
+        [1m[0mpublic_ip_address_id[0m[0m          = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-worker2"
+        [1m[0msubnet_id[0m[0m                     = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-dev"
+    }
+}
+
+# azurerm_network_interface_security_group_association.mySecGroupAssociation[1]:
+resource "azurerm_network_interface_security_group_association" "mySecGroupAssociation" {
+    [1m[0mid[0m[0m                        = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker1|/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker1"
+    [1m[0mnetwork_interface_id[0m[0m      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker1"
+    [1m[0mnetwork_security_group_id[0m[0m = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker1"
+}
+
+# azurerm_network_interface_security_group_association.mySecGroupAssociation[2]:
+resource "azurerm_network_interface_security_group_association" "mySecGroupAssociation" {
+    [1m[0mid[0m[0m                        = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker2|/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker2"
+    [1m[0mnetwork_interface_id[0m[0m      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-worker2"
+    [1m[0mnetwork_security_group_id[0m[0m = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker2"
+}
+
+# azurerm_network_interface_security_group_association.mySecGroupAssociation[0]:
+resource "azurerm_network_interface_security_group_association" "mySecGroupAssociation" {
+    [1m[0mid[0m[0m                        = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-master-nfs|/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-master-nfs"
+    [1m[0mnetwork_interface_id[0m[0m      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkInterfaces/vmnic-master-nfs"
+    [1m[0mnetwork_security_group_id[0m[0m = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-master-nfs"
+}
+
+# azurerm_network_security_group.mySecGroup[0]:
+resource "azurerm_network_security_group" "mySecGroup" {
+    [1m[0mid[0m[0m                  = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-master-nfs"
+    [1m[0mlocation[0m[0m            = "westeurope"
+    [1m[0mname[0m[0m                = "sshtraffic-master-nfs"
+    [1m[0mresource_group_name[0m[0m = "kubernetes_rg"
+    [1m[0msecurity_rule[0m[0m       = [
+        {
+            access                                     = "Allow"
+            description                                = ""
+            destination_address_prefix                 = "*"
+            destination_address_prefixes               = []
+            destination_application_security_group_ids = []
+            destination_port_range                     = "22"
+            destination_port_ranges                    = []
+            direction                                  = "Inbound"
+            name                                       = "SSH"
+            priority                                   = 1001
+            protocol                                   = "Tcp"
+            source_address_prefix                      = "*"
+            source_address_prefixes                    = []
+            source_application_security_group_ids      = []
+            source_port_range                          = "*"
+            source_port_ranges                         = []
+        },
+    ]
+    [1m[0mtags[0m[0m                = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_network_security_group.mySecGroup[1]:
+resource "azurerm_network_security_group" "mySecGroup" {
+    [1m[0mid[0m[0m                  = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker1"
+    [1m[0mlocation[0m[0m            = "westeurope"
+    [1m[0mname[0m[0m                = "sshtraffic-worker1"
+    [1m[0mresource_group_name[0m[0m = "kubernetes_rg"
+    [1m[0msecurity_rule[0m[0m       = [
+        {
+            access                                     = "Allow"
+            description                                = ""
+            destination_address_prefix                 = "*"
+            destination_address_prefixes               = []
+            destination_application_security_group_ids = []
+            destination_port_range                     = "22"
+            destination_port_ranges                    = []
+            direction                                  = "Inbound"
+            name                                       = "SSH"
+            priority                                   = 1001
+            protocol                                   = "Tcp"
+            source_address_prefix                      = "*"
+            source_address_prefixes                    = []
+            source_application_security_group_ids      = []
+            source_port_range                          = "*"
+            source_port_ranges                         = []
+        },
+    ]
+    [1m[0mtags[0m[0m                = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_network_security_group.mySecGroup[2]:
+resource "azurerm_network_security_group" "mySecGroup" {
+    [1m[0mid[0m[0m                  = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/networkSecurityGroups/sshtraffic-worker2"
+    [1m[0mlocation[0m[0m            = "westeurope"
+    [1m[0mname[0m[0m                = "sshtraffic-worker2"
+    [1m[0mresource_group_name[0m[0m = "kubernetes_rg"
+    [1m[0msecurity_rule[0m[0m       = [
+        {
+            access                                     = "Allow"
+            description                                = ""
+            destination_address_prefix                 = "*"
+            destination_address_prefixes               = []
+            destination_application_security_group_ids = []
+            destination_port_range                     = "22"
+            destination_port_ranges                    = []
+            direction                                  = "Inbound"
+            name                                       = "SSH"
+            priority                                   = 1001
+            protocol                                   = "Tcp"
+            source_address_prefix                      = "*"
+            source_address_prefixes                    = []
+            source_application_security_group_ids      = []
+            source_port_range                          = "*"
+            source_port_ranges                         = []
+        },
+    ]
+    [1m[0mtags[0m[0m                = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_public_ip.myPublicIp[1]:
+resource "azurerm_public_ip" "myPublicIp" {
+    [1m[0mallocation_method[0m[0m       = "Dynamic"
+    [1m[0mid[0m[0m                      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-worker1"
+    [1m[0midle_timeout_in_minutes[0m[0m = 4
+    [1m[0mip_version[0m[0m              = "IPv4"
+    [1m[0mlocation[0m[0m                = "westeurope"
+    [1m[0mname[0m[0m                    = "vmip-worker1"
+    [1m[0mresource_group_name[0m[0m     = "kubernetes_rg"
+    [1m[0msku[0m[0m                     = "Basic"
+    [1m[0mtags[0m[0m                    = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_public_ip.myPublicIp[2]:
+resource "azurerm_public_ip" "myPublicIp" {
+    [1m[0mallocation_method[0m[0m       = "Dynamic"
+    [1m[0mid[0m[0m                      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-worker2"
+    [1m[0midle_timeout_in_minutes[0m[0m = 4
+    [1m[0mip_version[0m[0m              = "IPv4"
+    [1m[0mlocation[0m[0m                = "westeurope"
+    [1m[0mname[0m[0m                    = "vmip-worker2"
+    [1m[0mresource_group_name[0m[0m     = "kubernetes_rg"
+    [1m[0msku[0m[0m                     = "Basic"
+    [1m[0mtags[0m[0m                    = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_public_ip.myPublicIp[0]:
+resource "azurerm_public_ip" "myPublicIp" {
+    [1m[0mallocation_method[0m[0m       = "Dynamic"
+    [1m[0mid[0m[0m                      = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/publicIPAddresses/vmip-master-nfs"
+    [1m[0midle_timeout_in_minutes[0m[0m = 4
+    [1m[0mip_version[0m[0m              = "IPv4"
+    [1m[0mlocation[0m[0m                = "westeurope"
+    [1m[0mname[0m[0m                    = "vmip-master-nfs"
+    [1m[0mresource_group_name[0m[0m     = "kubernetes_rg"
+    [1m[0msku[0m[0m                     = "Basic"
+    [1m[0mtags[0m[0m                    = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_resource_group.rg:
+resource "azurerm_resource_group" "rg" {
+    [1m[0mid[0m[0m       = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg"
+    [1m[0mlocation[0m[0m = "westeurope"
+    [1m[0mname[0m[0m     = "kubernetes_rg"
+    [1m[0mtags[0m[0m     = {
+        "environment" = "ucp2"
+    }
+}
+
+# azurerm_storage_account.stAccount:
+resource "azurerm_storage_account" "stAccount" {
+    [1m[0maccess_tier[0m[0m                    = "Hot"
+    [1m[0maccount_kind[0m[0m                   = "StorageV2"
+    [1m[0maccount_replication_type[0m[0m       = "LRS"
+    [1m[0maccount_tier[0m[0m                   = "Standard"
+    [1m[0mallow_blob_public_access[0m[0m       = false
+    [1m[0menable_https_traffic_only[0m[0m      = true
+    [1m[0mid[0m[0m                             = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Storage/storageAccounts/storaccangelunircp2"
+    [1m[0mis_hns_enabled[0m[0m                 = false
+    [1m[0mlocation[0m[0m                       = "westeurope"
+    [1m[0mmin_tls_version[0m[0m                = "TLS1_0"
+    [1m[0mname[0m[0m                           = "storaccangelunircp2"
+    [1m[0mprimary_access_key[0m[0m             = (sensitive value)
+    [1m[0mprimary_blob_connection_string[0m[0m = (sensitive value)
+    [1m[0mprimary_blob_endpoint[0m[0m          = "https://storaccangelunircp2.blob.core.windows.net/"
+    [1m[0mprimary_blob_host[0m[0m              = "storaccangelunircp2.blob.core.windows.net"
+    [1m[0mprimary_connection_string[0m[0m      = (sensitive value)
+    [1m[0mprimary_dfs_endpoint[0m[0m           = "https://storaccangelunircp2.dfs.core.windows.net/"
+    [1m[0mprimary_dfs_host[0m[0m               = "storaccangelunircp2.dfs.core.windows.net"
+    [1m[0mprimary_file_endpoint[0m[0m          = "https://storaccangelunircp2.file.core.windows.net/"
+    [1m[0mprimary_file_host[0m[0m              = "storaccangelunircp2.file.core.windows.net"
+    [1m[0mprimary_location[0m[0m               = "westeurope"
+    [1m[0mprimary_queue_endpoint[0m[0m         = "https://storaccangelunircp2.queue.core.windows.net/"
+    [1m[0mprimary_queue_host[0m[0m             = "storaccangelunircp2.queue.core.windows.net"
+    [1m[0mprimary_table_endpoint[0m[0m         = "https://storaccangelunircp2.table.core.windows.net/"
+    [1m[0mprimary_table_host[0m[0m             = "storaccangelunircp2.table.core.windows.net"
+    [1m[0mprimary_web_endpoint[0m[0m           = "https://storaccangelunircp2.z6.web.core.windows.net/"
+    [1m[0mprimary_web_host[0m[0m               = "storaccangelunircp2.z6.web.core.windows.net"
+    [1m[0mresource_group_name[0m[0m            = "kubernetes_rg"
+    [1m[0msecondary_access_key[0m[0m           = (sensitive value)
+    [1m[0msecondary_connection_string[0m[0m    = (sensitive value)
+    [1m[0mtags[0m[0m                           = {
+        "environment" = "ucp2"
+    }
+
+    network_rules {
+        [1m[0mbypass[0m[0m                     = [
+            "AzureServices",
+        ]
+        [1m[0mdefault_action[0m[0m             = "Allow"
+        [1m[0mip_rules[0m[0m                   = []
+        [1m[0mvirtual_network_subnet_ids[0m[0m = []
+    }
+
+    queue_properties {
+
+        hour_metrics {
+            [1m[0menabled[0m[0m               = true
+            [1m[0minclude_apis[0m[0m          = true
+            [1m[0mretention_policy_days[0m[0m = 7
+            [1m[0mversion[0m[0m               = "1.0"
+        }
+
+        logging {
+            [1m[0mdelete[0m[0m                = false
+            [1m[0mread[0m[0m                  = false
+            [1m[0mretention_policy_days[0m[0m = 0
+            [1m[0mversion[0m[0m               = "1.0"
+            [1m[0mwrite[0m[0m                 = false
+        }
+
+        minute_metrics {
+            [1m[0menabled[0m[0m               = false
+            [1m[0minclude_apis[0m[0m          = false
+            [1m[0mretention_policy_days[0m[0m = 0
+            [1m[0mversion[0m[0m               = "1.0"
+        }
+    }
+}
+
+# azurerm_subnet.mySubnetEnv[0]:
+resource "azurerm_subnet" "mySubnetEnv" {
+    [1m[0maddress_prefix[0m[0m                                 = "10.0.100.0/24"
+    [1m[0maddress_prefixes[0m[0m                               = [
+        "10.0.100.0/24",
+    ]
+    [1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+    [1m[0menforce_private_link_service_network_policies[0m[0m  = false
+    [1m[0mid[0m[0m                                             = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-pro"
+    [1m[0mname[0m[0m                                           = "terraformsubnet-pro"
+    [1m[0mresource_group_name[0m[0m                            = "kubernetes_rg"
+    [1m[0mvirtual_network_name[0m[0m                           = "kubernetesnet"
+}
+
+# azurerm_subnet.mySubnetEnv[1]:
+resource "azurerm_subnet" "mySubnetEnv" {
+    [1m[0maddress_prefix[0m[0m                                 = "10.0.101.0/24"
+    [1m[0maddress_prefixes[0m[0m                               = [
+        "10.0.101.0/24",
+    ]
+    [1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+    [1m[0menforce_private_link_service_network_policies[0m[0m  = false
+    [1m[0mid[0m[0m                                             = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-pre"
+    [1m[0mname[0m[0m                                           = "terraformsubnet-pre"
+    [1m[0mresource_group_name[0m[0m                            = "kubernetes_rg"
+    [1m[0mvirtual_network_name[0m[0m                           = "kubernetesnet"
+}
+
+# azurerm_subnet.mySubnetEnv[2]:
+resource "azurerm_subnet" "mySubnetEnv" {
+    [1m[0maddress_prefix[0m[0m                                 = "10.0.102.0/24"
+    [1m[0maddress_prefixes[0m[0m                               = [
+        "10.0.102.0/24",
+    ]
+    [1m[0menforce_private_link_endpoint_network_policies[0m[0m = false
+    [1m[0menforce_private_link_service_network_policies[0m[0m  = false
+    [1m[0mid[0m[0m                                             = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet/subnets/terraformsubnet-dev"
+    [1m[0mname[0m[0m                                           = "terraformsubnet-dev"
+    [1m[0mresource_group_name[0m[0m                            = "kubernetes_rg"
+    [1m[0mvirtual_network_name[0m[0m                           = "kubernetesnet"
+}
+
+# azurerm_virtual_network.myNet:
+resource "azurerm_virtual_network" "myNet" {
+    [1m[0maddress_space[0m[0m         = [
+        "10.0.0.0/16",
+    ]
+    [1m[0mguid[0m[0m                  = "788f0823-0bfb-4111-8c3a-438864d35e31"
+    [1m[0mid[0m[0m                    = "/subscriptions/a0c5f366-d3df-4c90-a3a8-431d022aea19/resourceGroups/kubernetes_rg/providers/Microsoft.Network/virtualNetworks/kubernetesnet"
+    [1m[0mlocation[0m[0m              = "westeurope"
+    [1m[0mname[0m[0m                  = "kubernetesnet"
+    [1m[0mresource_group_name[0m[0m   = "kubernetes_rg"
+    [1m[0msubnet[0m[0m                = []
+    [1m[0mtags[0m[0m                  = {
+        "environment" = "ucp2"
+    }
+    [1m[0mvm_protection_enabled[0m[0m = false
+}[0m[0m

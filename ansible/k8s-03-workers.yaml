@@ -1,0 +1,9 @@
+---
+
+- name: deploying kubernetes (step 3 - joining workers)
+	hosts: workers
+	vars_files:
+		- "group_vars/k8s-workers.yaml"
+	gather_facts: false
+	roles:
+		- role: k8s-workers

@@ -2,7 +2,7 @@
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
 
 resource "azurerm_linux_virtual_machine" "myVM" {
-    name		= "azure-vm-${var.vms[count.index]}"
+    name		= "vm-${var.vms[count.index]}"
     count		= length(var.vms)
     resource_group_name = azurerm_resource_group.rg.name
     location            = azurerm_resource_group.rg.location

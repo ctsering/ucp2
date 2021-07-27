@@ -1,0 +1,9 @@
+---
+
+- name: configuring master (step 2 - configuring master)
+	hosts: master
+	vars_files:
+		- "group_vars/k8s-master.yaml"
+	gather_facts: false
+	roles:
+		- role: k8s-master
