@@ -2,7 +2,7 @@
 
 - name: installing CNI plugin
   firewalld:
-	rich_rule: "rule family=ipv4 osurce address=17217.0.0/16 accept"
+	rich_rule: "rule family=ipv4 osurce address=172.20.0.0/16 accept"
 	permanent: yes
 	inmediate: yes
 	state: enabled
