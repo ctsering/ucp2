@@ -1,0 +1,9 @@
+[all:vars]
+ansible_user=adminUser
+
+[naster]
+pubip-master.westeurope.cloudapp.azure.com
+
+[workers]
+pubip-worker.westeurope.cloudapp.azure.com
+
