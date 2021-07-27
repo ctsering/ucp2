@@ -1,0 +1,6 @@
+---
+
+firewall_ports: ['10250/tcp', '30000-32767/tcp']
+master: '172.20.10.3:6443'
+token: 'hohtq0.mwyhsrp6c2uv0bba'
+discovery_token_ca_cert_hash: 'sha256:d26f10c44aae00f42a398b149df9e39d706dbf20fb1356caa805245b24ef050f'
